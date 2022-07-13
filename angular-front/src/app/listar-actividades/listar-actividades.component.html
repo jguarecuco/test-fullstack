@@ -1,0 +1,29 @@
+<a class="btn btn-primary" href="/nueva-actividad" routerLinkActive="active">Crear actividad</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Empleado</th>
+            <th scope="col">Atraso</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let actividad of actividades">
+            <td>{{ actividad.nombre }}</td>
+            <td>{{ actividad.estado }}</td>
+            <td>{{ getDate( actividad.timestamp) }}</td>
+            <td>{{ actividad.empleado }}</td>
+            <td><span *ngIf="actividad.estado!='Realizada'">{{ getAtraso(actividad.timestamp) }}</span></td>
+            <td>        
+                <button (click)= "actualizarActividad(actividad.id)" class="btn btn-info">Editar</button>
+                <button (click)= "eliminarActividad(actividad.id)" class="btn btn-danger" style="margin-left : 10px;">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+

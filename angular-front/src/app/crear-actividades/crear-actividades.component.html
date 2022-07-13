@@ -1,0 +1,31 @@
+<div class="col-md-6 offset-md-3">
+    <h3 class="text-center">Registro de actividades</h3>
+        <form (ngSubmit)="onSubmit()" #actividadForm="ngForm">
+            <div class="form-group">
+                <label>Nombre : </label>
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="actividad.nombre" name="nombre"
+                    required minlength="4" maxlength="10" placeholder="Digite su nombre " #nombre="ngModel">
+            </div>
+
+            <div class="form-group">
+                <label>fecha : </label>
+                <input type="datetime-local" class="form-control" id="fecha" name="fecha" (change)="onTimestamp($event)" required>
+
+            </div>
+            <div class="form-group">
+                <label>Estado : </label>
+                <select class="form-control" [(ngModel)]="actividad.estado" (change)="updateObj($event)"> 
+                    <option *ngFor="let estado of estados"  [value]="estado">{{estado}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Empleado : </label>
+                <select class="form-control" [(ngModel)]="actividad.empleado" (change)="updateObj1($event)">
+                    <option *ngFor="let empleado of empleados" [value]="empleado">{{empleado}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+            <button class="btn btn-success" [disabled]="!actividadForm.form.valid">Guardar</button>
+            </div>
+        </form>
+</div>
