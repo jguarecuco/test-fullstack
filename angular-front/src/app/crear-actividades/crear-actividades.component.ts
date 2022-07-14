@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { Actividad } from '../actividad';
 import { ActividadesService } from '../actividades.service';
+import { EmpleadosService } from '../empleados.service';
 
 @Component({
   selector: 'app-crear-actividades',
@@ -11,10 +12,13 @@ import { ActividadesService } from '../actividades.service';
 })
 export class CrearActividadesComponent implements OnInit {
   actividad: Actividad = new Actividad();
-  constructor(private actividadesServicio:ActividadesService,private router:Router) { }
+  constructor(private actividadesServicio:ActividadesService,private empleadosServicios: EmpleadosService,private router:Router) { }
   estados: string[] = ['Pendiente', 'Realizada'];
-  empleados:string[] = ['Juan','Pedro','Maria','Juana','Jorge','Juanito'];
+  empleados:string[] = [];
   ngOnInit(): void {
+    this.empleadosServicios.obtenerEmpleados().subscribe(dato =>{
+      this.empleados = dato.map(x=>x.nombre);
+    },error => console.log(error));
   }
   guardarActividad(){
     this.actividadesServicio.registrarActividad(this.actividad).subscribe(dato => {

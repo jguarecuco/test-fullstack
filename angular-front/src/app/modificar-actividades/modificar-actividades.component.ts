@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { Actividad } from '../actividad';
 import { ActividadesService } from '../actividades.service';
+import { EmpleadosService } from '../empleados.service';
 
 @Component({
   selector: 'app-modificar-actividades',
@@ -13,11 +14,12 @@ export class ModificarActividadesComponent implements OnInit {
   actividad:Actividad = new Actividad();
   id:number;
   estados: string[] = ['Pendiente', 'Realizada'];
-  empleados:string[] = ['Juan','Pedro','Maria','Juana','Jorge','Juanito'];
+  empleados:string[] = [];
   date: Date = new Date();
-  constructor(private actividadesServicio:ActividadesService,private router:Router,private route:ActivatedRoute) { }
+  constructor(private actividadesServicio:ActividadesService,private empleadosServicios: EmpleadosService,private router:Router,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.obtenerEmpleados();
     this.id = this.route.snapshot.params['id'];
     this.actividadesServicio.obtenerActividadPorId(this.id).subscribe(dato =>{
       this.date =new Date(dato.timestamp * 1000)
@@ -25,7 +27,11 @@ export class ModificarActividadesComponent implements OnInit {
 
     },error => console.log(error));
   }
-
+obtenerEmpleados(){
+  this.empleadosServicios.obtenerEmpleados().subscribe(dato =>{
+    this.empleados = dato.map(x=>x.nombre);
+  },error => console.log(error));
+}
   guardarActividad(){
     this.actividadesServicio.actualizarActividad(this.id,this.actividad).subscribe(dato => {
       console.log(dato);
