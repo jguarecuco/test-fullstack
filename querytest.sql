@@ -15,7 +15,7 @@ INSERT INTO `activitymanager`.`actividades`
 `timestamp`)
 VALUES
 (
-'Luis',
+'Carlos Angulo',
 'Pendiente',
 'Tarea 1',
 1657710742);
@@ -27,7 +27,37 @@ INSERT INTO `activitymanager`.`actividades`
 `timestamp`)
 VALUES
 (
-'Jose',
+'Jose Guarecuco',
 'Pendiente',
 'Tarea 2',
 1657710742);
+
+CREATE TABLE `empleados` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+
+INSERT INTO `activitymanager`.`empleados`
+(
+`name`)
+VALUES
+(
+'Jose Guarecuco');
+
+INSERT INTO `activitymanager`.`empleados`
+(
+`name`)
+VALUES
+(
+'Carlos Angulo');
+
+INSERT INTO `activitymanager`.`empleados`
+(
+`name`)
+VALUES
+(
+'Victor Garcia');
+
+
